@@ -1,5 +1,8 @@
 **Members names:** Steven Fojas , Cristian Nativo, Yordy Cruz, Man Vu
 
+**Responsibilities**
+Preprocessing: Steven
+
 **Problem definition:** 
 The goal of this project is to develop machine learning models that can accurately predict the popularity values of songs based on various features such as song duration and danceability.
 
