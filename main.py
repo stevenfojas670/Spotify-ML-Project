@@ -4,12 +4,16 @@ import os
 import seaborn as sns
 import matplotlib.pyplot as plt
 
+# If you want to print all columns of a dataset, uncomment this
+# pd.set_option('display.max_columns', None)
+
 # Preprocessing libraries
 from sklearn.preprocessing import MinMaxScaler, StandardScaler
 
 """
-    Run this code if for some reason songs_processed.csv is not available
-    This code will process songs_normalize and prepare it for further standardization
+
+    # Run this code if for some reason songs_processed.csv is not available
+    # This code will process songs_normalize and prepare it for further standardization
 
 df = pd.read_csv('songs_normalize.csv')
 df = df.drop(df.columns[1], axis=1)
@@ -35,9 +39,6 @@ df_modified = pd.concat([df.drop(columns=['genre', 'genre_split']), genre_dummie
 # Step 6: Dropping set()
 df_modified = df_modified.drop(columns=['set()'])
 
-# Step 7: Change explicit to '0' and '1'
-df_modified['explicit'] = df['explicit'].astype(int)  # This converts True to 1 and False to 0
-
 # Show the updated DataFrame structure
 print(df_modified.head())
 
@@ -62,4 +63,21 @@ print("File path:", file_path)
 """
 
 p_data = pd.read_csv('songs_processed.csv')
-print(p_data.head())
+
+numerical_data = p_data.select_dtypes(include=['int64', 'float64'])
+categorical_data = p_data.select_dtypes(include=['bool', 'object'])
+
+# Initialize the MinMaxScaler
+scaler = MinMaxScaler()
+
+# Fit and transform the numerical data
+scaled_numerical_data = scaler.fit_transform(numerical_data)
+
+# Create a DataFrame for the scaled numerical data
+scaled_numerical_df = pd.DataFrame(scaled_numerical_data, columns=numerical_data.columns)
+
+# Display the scaled numerical data
+# print(scaled_numerical_df.head())
+
+final_data = pd.concat([categorical_data, scaled_numerical_df], axis=1)
+# print(final_data.head())
