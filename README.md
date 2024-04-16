@@ -1,14 +1,10 @@
 **Members names:** Steven Fojas , Cristian Nativo, Yordy Cruz, Man Vu
 
-
 **Problem definition:** 
 The goal of this project is to develop machine learning models that can accurately predict the popularity values of songs based on various features such as song duration and danceability.
 
-
-**List of ML Methods to implement:**
-Linear Regression
-KNN
-Using these methods will let us look at the problem from different angles and compare their performance
+**Methods Implementing**
+Neural Networks with Pytorch
 
 **Brief description of the data**
 The data contains Top Hits from Spotify ranging from 2000 to 2019.
