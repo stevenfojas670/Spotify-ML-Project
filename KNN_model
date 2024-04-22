@@ -1,0 +1,49 @@
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.neighbors import KNeighborsRegressor
+import matplotlib.pyplot as plt
+import numpy as np
+
+# KNN for our model, plots a scatter plot at the end of the model and shows the
+# difference between actual and predicted score.
+
+# Load the dataset
+data = pd.read_csv("songs_processed.csv")
+
+# Drop non-numeric columns and columns that are not useful for prediction
+X = data.drop(columns=['popularity', 'artist'])
+
+# Target variable
+y = data['popularity']
+
+# Split the data into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Standardize the features
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+
+# Initialize KNN regressor
+knn = KNeighborsRegressor(n_neighbors=5)
+
+# Fit the model
+knn.fit(X_train_scaled, y_train)
+
+# Make predictions
+y_pred = knn.predict(X_test_scaled)
+
+# Uncomment this section to show a line of best fit to the scatter plot
+# Fit a line to the data points
+# z = np.polyfit(y_test, y_pred, 1)
+# p = np.poly1d(z)
+
+# Plot predicted vs actual popularity
+plt.scatter(y_test, y_pred)
+plt.xlabel("Actual Popularity")
+plt.ylabel("Predicted Popularity")
+plt.title("Actual vs Predicted Popularity")
+# plt.plot(y_test, p(y_test), color='red')
+
+plt.show()
