@@ -23,7 +23,7 @@ scaler = StandardScaler()
 X_scaled = scaler.fit_transform(X)
 
 #Splitting the data into train and test sets
-X_train, X_test, y_train, y_test = train_test_split(X_scaled, y, test_size=0.3, random_state=62)
+X_train, X_test, y_train, y_test = train_test_split(X_scaled, y, test_size=0.2, random_state=62)
 
 #Train the linear regression model
 linear = LinearRegression()
